@@ -6,7 +6,7 @@ import useStyles from './styles';
 import CartItem from './CartItem/CartItem';
 
 
-const Cart = ({cart}) => {
+const Cart = ({cart, handleUpdateCartQty, handleRemoveFromCart, handleEmptyCart }) => {
     //const isEmpty = !cart.line_items.length;//is same as ===0
 
     const classes = useStyles();
@@ -22,14 +22,14 @@ const Cart = ({cart}) => {
         <Grid container spacing={3}>
             {cart.line_items.map((item)=>(
                 <Grid item xs={12} sm={4} key={item.id}>
-                    <CartItem item={item} />
+                    <CartItem item={item} onUpdateCartQty={handleUpdateCartQty} onRemoveFromCart={handleRemoveFromCart} />
                 </Grid>
             ))}
         </Grid>
         <div className={classes.cardDetails}>
             <Typography variant="h2">Subtotal:{cart.subtotal.formatted_with_symbol}</Typography>
             <div>
-                <Button className={classes.emptyButton} size="large" type="button" variant="contained" color="secondary">Empty Cart</Button>
+                <Button className={classes.emptyButton} size="large" type="button" variant="contained" color="secondary" onClick={handleEmptyCart}>Empty Cart</Button>
                 <Button className={classes.checkoutButton} size="large" type="button" variant="contained" color="primary">Checkout</Button>
                 
             </div>
